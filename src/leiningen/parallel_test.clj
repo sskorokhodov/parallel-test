@@ -105,8 +105,8 @@ namespace and print an overall summary."
             *monkeypatch?* (:monkeypatch-clojure-test project true)]
     (let [profile (or (:parallel-test (:profiles project)) parallel-test-profile)
           project (-> project
-                      (project/add-profiles {:parallel-test parallel-test-profile})
-                      (project/merge-profiles [:leiningen/test :test :parallel-test]))
+                      (project/add-profiles {:parallel-test parallel-test-profile :parallel-test-user profile})
+                      (project/merge-profiles [:leiningen/test :test :parallel-test :parallel-test-user]))
           [nses selectors] (read-args tests project)
           config (merge default-config
                         (:parallel-test project))
